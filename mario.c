@@ -26,7 +26,7 @@ int main(void)
     for (i = 0; i < n; i++)
     {
         int m;
-        for (m = n - i; m > 0; m--)       
+        for (m = n - i -1; m > 0; m--)       
         {
             printf(" ");            
         }
