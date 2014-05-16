@@ -35,7 +35,10 @@ int main(int argc, string argv[])
     for (int i = 0, j = 0, result = 0, n = strlen(text); i < n; i++)
     {
         char letter = text[i];
-        char key = argv[1][(j) % m];   
+        // if the letter proves to be a non-alphabetical character, wait to apply that jth character 
+        // of key to the next alphabetical character in text not yet advance to the next character in key
+        char key = argv[1][(j) % m]; 
+        // as for the characters in key, treats A and a as 0, B and b as 1, … , and Z and z as 25    
         if (isupper(key)) 
         {
            key -= 65; 
@@ -54,6 +57,7 @@ int main(int argc, string argv[])
            result = (letter  + key - 97) % 26 + 97;
            j++;
         }
+        // if the character in text is not a letter, outputs this character unchanged
         else
         {
            result = letter;
@@ -62,3 +66,4 @@ int main(int argc, string argv[])
     }   
     printf("\n");      
 }        
+ 
