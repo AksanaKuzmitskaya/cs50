@@ -33,6 +33,7 @@ int main(int argc, string argv[])
             return 1;
         }
     }   
+    // get the message from the user
     string text = GetString();
     for (int i = 0, j = 0, result = 0, n = strlen(text); i < n; i++)
     {
