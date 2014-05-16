@@ -15,6 +15,8 @@
 
 int main(int argc, string argv[])
 {   
+ 
+    // check whether number of command-line arguments equals 2
     if (argc != 2) 
     {
         printf("Usage: ./asciimath key\n");
@@ -23,19 +25,27 @@ int main(int argc, string argv[])
     else 
     {
         int key = atoi(argv[1]); 
+        
+        // get the message from the user
         string text = GetString();
         for (int i = 0, n = strlen(text); i < n; i++)
         {
             char letter = text[i];
-            int result; 
+            int result;
+            
+            //capitalized letters, though rotated, remain capitalized letters 
             if (isupper(letter))
             {
                 result = ((letter - 65) + key) % 26 + 65;
-            }   
+            } 
+            
+            //lowercase letters, though rotated, remain lowercase letters
             else if (islower(letter))
             {
                 result = ((letter - 97) + key) % 26 + 97;
             }
+            
+            // if the character in text is not a letter, output this character unchanged
             else
             {
                 result = letter;
