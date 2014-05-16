@@ -15,12 +15,14 @@
 
 int main(int argc, string argv[])
 {   
+    // checks whether number of command-line arguments equals 2
     if (argc != 2) 
     {
-        printf("Usage: ./vigenere <keyword> key\n");
+        printf("Usage: ./vigenere <keyword>\n");
         return 1;
     }
     int m = strlen(argv[1]);
+    // checks if one command-line argument contains any non-alphabetical character
     for (int i = 0; i < m; i++)
     {   
         if (isalpha( argv[1][i]) == false)
