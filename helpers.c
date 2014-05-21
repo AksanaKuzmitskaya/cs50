@@ -48,20 +48,18 @@ void sort(int values[], int n)
     // an O(n^2) sorting algorithm - selection sort
     for (int i = 0; i < n - 1; i++)
     {
-        for(int j = i + 1, min, max; j < n; j++)
+        for(int j = i + 1, min; j < n; j++)
         {
             if (values[i] > values[j])
             {
                 min = values[j];
-                max = values[i];
+                values[j] = values[i];
             }
             else 
             {
                 min = values[i];
-                max = values[j];
             } 
             values[i] = min;
-            values[j] = max;
         } 
     }
     for (int i = 0; i < n; i++)
