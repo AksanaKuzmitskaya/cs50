@@ -3,8 +3,12 @@
  *
  * Computer Science 50
  * Problem Set 3
+ * 
+ * Aksana Kuzmitskaya
+ * aksana.kuzmitskaya@gmail.com
  *
  * Helper functions for Problem Set 3.
+ * (I have implemented search and sort functions)
  */
        
 #include <cs50.h>
