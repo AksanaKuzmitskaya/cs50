@@ -16,7 +16,7 @@
 int main(int argc, string argv[])
 {   
  
-    // check whether number of command-line arguments equals 2
+    // ensure proper usage
     if (argc != 2) 
     {
         printf("Usage: ./vigenere <keyword>\n");
