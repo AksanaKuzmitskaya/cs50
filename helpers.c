@@ -20,28 +20,24 @@
  */
 bool search(int value, int values[], int n)
 {
-    if (n <= 0)
+    int min = 0, max = n - 1, midpoint;
+    while ((max - min + 1) > 0)
     {
-        return false;
-    }
-    else
-    {
-    
-    // searching algorithm
-        int count = 0;
-        for (int i = 0; i < n; i++)
-        {   
-            if (value == values[i])
-            {
-                count++;
-            }
-        }
-        if (count > 0)
+        midpoint = (max - min + 1)/ 2 + min;
+        if (values[midpoint] == value)
         {
             return true;
         }
-        else return false;
+        else if (values[midpoint] < value)
+        {       
+            min = midpoint + 1;
+        }
+        else if (values[midpoint] > value)
+        {
+            max = midpoint - 1;
+        }
     }
+    return false;
 }
 
 /**
