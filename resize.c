@@ -58,7 +58,7 @@ int main(int argc, char* argv[])
     {
         fclose(inptr);
         fprintf(stderr, "Could not create %s.\n", outfile);
-+        return 4;
+        return 4;
     }
 
     // read infile's BITMAPFILEHEADER
