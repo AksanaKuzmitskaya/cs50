@@ -15,23 +15,21 @@
 int main(void)
 {
     int n;
+    
     do 
     {
         printf("Height: ");
         n = GetInt();   
     }
     while (n > 23 || n < 0);
-    
-    int i;
-    for (i = 0; i < n; i++)
+   
+    for (int i = 0; i < n; i++)
     {
-        int m;
-        for (m = n - i -1; m > 0; m--)       
+        for (int m = n - i - 1; m > 0; m--)       
         {
             printf(" ");            
         }
-        int k;
-        for (k = 0; k < i+2; k++)       
+        for (int k = 0, l = i + 2; k < l; k++)       
         {
             printf("#");            
         }
