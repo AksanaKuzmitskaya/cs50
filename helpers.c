@@ -21,22 +21,27 @@
 bool search(int value, int values[], int n)
 {
     int min = 0, max = n - 1, midpoint;
+    
     while ((max - min + 1) > 0)
     {
         midpoint = (max - min + 1)/ 2 + min;
+        
         if (values[midpoint] == value)
         {
             return true;
         }
+        
         else if (values[midpoint] < value)
         {       
             min = midpoint + 1;
         }
+        
         else if (values[midpoint] > value)
         {
             max = midpoint - 1;
         }
     }
+    
     return false;
 }
 
@@ -48,20 +53,25 @@ void sort(int values[], int n)
     // an O(n^2) sorting algorithm - selection sort
     for (int i = 0; i < n - 1; i++)
     {
+        
         for(int j = i + 1, min; j < n; j++)
         {
+        
             if (values[i] > values[j])
             {
                 min = values[j];
                 values[j] = values[i];
             }
+            
             else 
             {
                 min = values[i];
             } 
+            
             values[i] = min;
         } 
     }
+    
     for (int i = 0; i < n; i++)
     {
         printf("%d\n", values[i]);
