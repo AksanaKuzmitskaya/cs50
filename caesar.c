@@ -24,10 +24,12 @@ int main(int argc, string argv[])
     }
     else 
     {
+        // convert the string argument to an integer          
         int key = atoi(argv[1]); 
         
         // get the message from the user
         string text = GetString();
+        
         for (int i = 0, n = strlen(text); i < n; i++)
         {
             char letter = text[i];
