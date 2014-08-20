@@ -45,5 +45,6 @@ int main(void)
     
     count += amount; 
     
+    // print minimum number of coins with which change can be made. 
     printf ("%d\n", count);
 }
