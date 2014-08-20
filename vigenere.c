@@ -22,6 +22,8 @@ int main(int argc, string argv[])
         printf("Usage: ./vigenere <keyword>\n");
         return 1;
     }
+    
+    // compute the length of the string
     int m = strlen(argv[1]);
     
     // check if one command-line argument contains any non-alphabetical character
@@ -36,8 +38,10 @@ int main(int argc, string argv[])
     
     // get the message from the user
     string text = GetString();
+    
     for (int i = 0, j = 0, result = 0, n = strlen(text); i < n; i++)
     {
+    
         char letter = text[i];
         
         // if the letter proves to be a non-alphabetical character, wait to apply that jth character 
@@ -49,15 +53,18 @@ int main(int argc, string argv[])
         {
            key -= 65; 
         }
+  
         else if (islower(key))
         {
            key -= 97;
         }
+        
         if (isupper(letter))
         {
             result = (letter + key - 65) % 26 + 65;
             j++;
-        }   
+        }
+        
         else if (islower(letter))
         {
            result = (letter  + key - 97) % 26 + 97;
@@ -69,8 +76,10 @@ int main(int argc, string argv[])
         {
            result = letter;
         }
+        
            printf("%c", result);
-    }   
+    } 
+    
     printf("\n");      
 }        
  
