@@ -113,13 +113,13 @@ int main(void)
         // ball collides with the paddle and bounce off of the paddle
         if (object == paddle)
         {
-            velocity = -velocity; 
+            velocity = - velocity; 
         }
             
         // ball collides with the brick and removes it
         else if (object != NULL && strcmp(getType(object), "GRect") == 0)
         {
-            velocity = -velocity;
+            velocity = - velocity;
             removeGWindow(window, object);
             bricks--;
             points++;
@@ -147,19 +147,19 @@ int main(void)
         // bounce off top of window
         else if (getY(ball) <= 0)
         {
-             velocity = -velocity;
+             velocity = - velocity;
         }
                 
         // bounce off left edge of window
         else if (getX(ball) <= 0)
         {
-            angle = -angle; 
+            angle = - angle; 
         }
                 
         // bounce off right edge of window
         else if (getX(ball) + getWidth(ball) >= getWidth(window))
         {
-            angle = -angle;
+            angle = - angle;
         }
         pause(PAUSE);
              
