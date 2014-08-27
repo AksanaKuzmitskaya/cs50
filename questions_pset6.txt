@@ -6,7 +6,7 @@ caused by inhaling very fine ash and sand dust", according to the Oxford Diction
 1. According to its man page, what does getrusage do?
 
 Getrusage - returns resource usage measures for who, which can be one of the following: 
-- RUSAGE_SEF Return resource usage statistics for the calling process, which is the sum of resources used by all threads in the process.
+- RUSAGE_SELF Return resource usage statistics for the calling process, which is the sum of resources used by all threads in the process.
 - RUSAGE_CHILDREN Return resource usage statistics for all children of the calling process that have terminated and been waited for.  
 These statistics will include the resources used by grandchildren, and further removed descendants, if all of the intervening descendants 
 waited on their terminated children.
