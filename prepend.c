@@ -28,12 +28,17 @@ node* head = NULL;
 
 void prepend(int i)
 {
+    // build new node
     node* new_node = malloc(sizeof(node));
     if(new_node == NULL)
     {
         exit(1);
     }
+    
+    // initialize new node
     new_node->n = i;
+    
+    // add new node to head of list
     new_node->next = head;
     head = new_node;    
 }
