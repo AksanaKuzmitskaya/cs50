@@ -18,6 +18,7 @@ char* my_strchr(char* str, char c)
 {
     while (*str != '\0')
     {
+        // check if the character is in the string
         if (*str == c)
         {
             return str;
