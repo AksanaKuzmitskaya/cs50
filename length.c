@@ -1,3 +1,15 @@
+/****************************************************************************
+ * length.c
+ *
+ * Computer Science 50
+ * 
+ * Aksana Kuzmitskaya
+ * aksana.kuzmitskaya@gmail.com
+ *
+ * Write a function that returns the length of a singly linked list
+ *
+ ***************************************************************************/
+ 
 #include <stdio.h>
 #include <assert.h>
 #include <stdbool.h>
