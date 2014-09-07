@@ -1,5 +1,5 @@
 /**
- * copy.c
+ * resize.c
  *
  * Computer Science 50
  * Problem Set 5
