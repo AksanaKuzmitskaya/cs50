@@ -1,0 +1,74 @@
+0. What is pneumonoultramicroscopicsilicovolcanoconiosis?
+
+Pneumonoultramicroscopicsilicovolcanoconiosis is "an artificial long word said to mean a lung disease 
+caused by inhaling very fine ash and sand dust", according to the Oxford Dictionaries.[1] It is the longest word in the English language.
+
+1. According to its man page, what does getrusage do?
+
+Getrusage - returns resource usage measures for who, which can be one of the following: 
+- RUSAGE_SEF Return resource usage statistics for the calling process, which is the sum of resources used by all threads in the process.
+- RUSAGE_CHILDREN Return resource usage statistics for all children of the calling process that have terminated and been waited for.  
+These statistics will include the resources used by grandchildren, and further removed descendants, if all of the intervening descendants 
+waited on their terminated children.
+- RUSAGE_THREAD Return resource usage statistics for the calling thread.
+
+2. Per that same man page, how many members are in a variable of type struct rusage?
+
+16 members are in a variable of type struct rusage
+ struct rusage {
+               struct timeval ru_utime; /* user CPU time used */
+               struct timeval ru_stime; /* system CPU time used */
+               long   ru_maxrss;        /* maximum resident set size */
+               long   ru_ixrss;         /* integral shared memory size */
+               long   ru_idrss;         /* integral unshared data size */
+               long   ru_isrss;         /* integral unshared stack size */
+               long   ru_minflt;        /* page reclaims (soft page faults) */
+               long   ru_majflt;        /* page faults (hard page faults) */
+               long   ru_nswap;         /* swaps */
+               long   ru_inblock;       /* block input operations */
+               long   ru_oublock;       /* block output operations */
+               long   ru_msgsnd;        /* IPC messages sent */
+               long   ru_msgrcv;        /* IPC messages received */
+               long   ru_nsignals;      /* signals received */
+               long   ru_nvcsw;         /* voluntary context switches */
+               long   ru_nivcsw;        /* involuntary context switches */
+           };
+
+3. Why do you think we pass before and after by reference (instead of by value) to calculate, even though we’re not changing their contents?
+ 
+The getrusage function prototype expects a pointer. Also, this is considerably more efficient than passing by value.
+ 
+4. Explain as precisely as possible, in a paragraph or more, how main goes about reading words from a file. In other words, convince us that you indeed understand how that function’s for loop works.
+
+First main determines variables (index, misspellings, words) and an array for storing a word (word[LENGTH+1]) in order to prepare to spell-check. 
+Then it spell-checks each word in text, using fgetc() function, until it gets the end of the file. fgetc() gets the next character from the file and advances the position indicator for the stream. 
+Then it checks if the characters are alphabetical and apostrophes and stores them in the array word. If the word is too long or with numbers, it is ignored and next word is checked. 
+After all characters are checked, it terminates current word and updates counter of words. check() returns true if word is in dictionary else false. misspelled stores the word, if check() returns false. 
+Then index = 0 and next word is checked.
+
+5. Why do you think we used fgetc to read each word’s characters one at a time rather than use fscanf with a format string like "%s" to read whole words at a time? Put another way, what problems might arise by relying on fscanf alone?
+
+fgetc checks the character is a valid letter and fscanf doesn't check each character and might return a string with invalid characters (for example comma).
+
+6. Why do you think we declared the parameters for check and load as const?
+
+ Declared parameters are pointers, which do not change the values that they are pointing to. check and load just read those values. 
+ 
+
+7. What data structure(s) did you use to implement your spell-checker? Be sure not to leave your answer at just "hash table," "trie," or the like. Expound on what’s inside each of your "nodes."
+
+I used "hash table" with linked lists. Each bucket contains word or word and pointer to a next word if collision occurs
+
+How slow was your code the first time you got it working correctly?
+
+It was fast
+
+What kinds of changes, if any, did you make to your code over the course of the week in order to improve its performance?
+
+Did not change anything, because it is pretty fast
+
+Do you feel that your code has any bottlenecks that you were not able to chip away at? 
+
+I had them but I improved them
+
+
