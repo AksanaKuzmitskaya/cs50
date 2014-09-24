@@ -1,10 +1,10 @@
 /**
- * caesar.c
+ * vigenere.c
  *
  * Aksana Kuzmitskaya
  * aksana.kuzmitskaya@gmail.com
  *
- * Encrypts messages using Caesar’s cipher.
+ * Encrypts messages using Vigenere’s cipher.
  */
  
 #include <cs50.h>
