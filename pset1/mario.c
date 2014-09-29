@@ -4,7 +4,9 @@
  * Aksana Kuzmitskaya
  * aksana.kuzmitskaya@gmail.com
  *
- * Says hello to the world.
+ * program that recreates half-pyramid using hashes (#) for blocks. 
+ * (the half-pyramid’s height should be a non-negative integer no greater than 23)
+ *  
  */
  
 #include <cs50.h>
