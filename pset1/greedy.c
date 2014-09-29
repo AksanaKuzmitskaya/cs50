@@ -4,7 +4,10 @@
  * Aksana Kuzmitskaya
  * aksana.kuzmitskaya@gmail.com
  *
- * Says hello to the world.
+ * a program that first asks the user 
+ * how much change is owed and then spits 
+ * out the minimum number of coins with which said change can be made
+ * 
  */
  
 #include <cs50.h>
