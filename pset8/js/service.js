@@ -277,50 +277,53 @@ function load()
  */
 function pickup()
 {
-    var passengers = false;
+    var emptyseats = seatsleft();
+    
+    var passengersinrange = [];
     for (var i = 0; i < PASSENGERS.length; i++)
     {
         p = PASSENGERS[i].placemark.getGeometry();
     
         // calculate shuttle's distance from some point(lat, lng) 
         var d = shuttle.distance(p.getLatitude(), p.getLongitude());
-        console.log("pas " + i + " distance = " + d);
+       
         // detect the passenger in range
-        if (d > 15.0)
+        if (d <= 15.0)
         {
-            $("#announcements").html("There are no passengers to be picked up");
+           passengersinrange[passengersinrange.length] = i;
         }
-        else if (seatsleft() == SEATS)
+    }
+        if (passengersinrange.length > 0 && emptyseats > 0)
+        {
+            $("#announcements").html("There are passengers to be picked up!");
+            for (var i = 0; i < passengersinrange.length; i++)
+            {
+               for (var j = 0; j < emptyseats; j++)
+               {
+                    // add passenger to shuttle
+                    if (shuttle.seats[j] == null)
+                    {
+                        shuttle.seats[i] = PASSENGERS[passengersinrange[i]]
+                        chart();
+                    }
+               }  
+            } 
+            
+        }
+        else if (emptyseats <= 0)
         {
             $("#announcements").html("No seats are free");
         }
         else
         {
-            passengers = true;
-            $("#announcements").html("There are passengers to be picked up!");
+            $("#announcements").html("There are no passengers to be picked up");
         }
-    }
     // any such announcments should be removed or replaced with some default text as soon as the shuttle moves 
 
     // not pick up any freshmen (anyone whose home isn't in js/houses.js)
    
     // populate()-remember and store in global array placemark marker
     //PASSENGERS already stores name, house , add elements to that placemarks
-    // passenger's location is given by their placemark
-    //get Geometry()//on the placemark
-    //getLatitude() //after
-    //get Geometry() -> getLongitude()
-    
-    // to detect loop through every passangers in the array
-    //var array = [1, 2, 3];
-    //for (var i in array)
-     //   alert(array[i]);
-    
-    // 2. add passenger to shuttle
-    //shuttle.seats.length
-    // look for an empty seat(iterating through the array, store passengers until there no more empty seats)
-    //shuttle.seats[i] == null//store passenger in the seat
-    // update shuttle.seats, not add extra
     
     // 3. remove placemark 
     // photo on the 3D
@@ -329,10 +332,7 @@ function pickup()
     //features.removeChild(p) 
     
     // 4. remove marker m
-    //m.setMap(null);
-    
-    // 5. display passengers in shuttle
-    // update #seats anytime the array is updated by calling chart   
+    //m.setMap(null); 
 }
 
 /**
