@@ -288,51 +288,46 @@ function pickup()
         var d = shuttle.distance(p.getLatitude(), p.getLongitude());
        
         // detect the passenger in range
-        if (d <= 15.0)
+        // not pick up any freshmen (anyone whose home isn't in js/houses.js)
+        if (d <= 15.0 && HOUSES[PASSENGERS[i].house] != null)
         {
            passengersinrange[passengersinrange.length] = i;
         }
     }
-        if (passengersinrange.length > 0 && emptyseats > 0)
+    if (passengersinrange.length > 0 && emptyseats > 0)
+    {
+        $("#announcements").html("There are passengers to be picked up!");
+        for (var i = 0; i < passengersinrange.length; i++)
         {
-            $("#announcements").html("There are passengers to be picked up!");
-            for (var i = 0; i < passengersinrange.length; i++)
+            for (var j = 0; j < emptyseats; j++)
             {
-               for (var j = 0; j < emptyseats; j++)
-               {
-                    // add passenger to shuttle
-                    if (shuttle.seats[j] == null)
-                    {
-                        shuttle.seats[i] = PASSENGERS[passengersinrange[i]]
-                        chart();
-                    }
-               }  
-            } 
+                // add passenger to shuttle
+                if (shuttle.seats[j] == null)
+                {
+                    shuttle.seats[i] = PASSENGERS[passengersinrange[i]];
+                    
+                    // remove placemark 
+                    var features = earth.getFeatures()
+                    features.removeChild(PASSENGERS[passengersinrange[i]].placemark)
+                    
+                    // remove marker 
+                    PASSENGERS[passengersinrange[i]].marker.setMap(null); 
+        
+                    chart();
+                }
+            }  
+        } 
             
-        }
-        else if (emptyseats <= 0)
-        {
-            $("#announcements").html("No seats are free");
-        }
-        else
-        {
-            $("#announcements").html("There are no passengers to be picked up");
-        }
+    }
+    else if (emptyseats <= 0)
+    {
+       $("#announcements").html("No seats are free");
+    }
+    else
+    {
+        $("#announcements").html("There are no passengers to be picked up");
+    }
     // any such announcments should be removed or replaced with some default text as soon as the shuttle moves 
-
-    // not pick up any freshmen (anyone whose home isn't in js/houses.js)
-   
-    // populate()-remember and store in global array placemark marker
-    //PASSENGERS already stores name, house , add elements to that placemarks
-    
-    // 3. remove placemark 
-    // photo on the 3D
-    // remove placemark p
-    //var features = earth.getFeatures()
-    //features.removeChild(p) 
-    
-    // 4. remove marker m
-    //m.setMap(null); 
 }
 
 /**
