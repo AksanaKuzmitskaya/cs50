@@ -49,6 +49,7 @@ $(window).load(function() {
     // listen for keydown anywhere in body
     $(document.body).keydown(function(event) {
         return keystroke(event, true);
+        
     });
 
     // listen for keyup anywhere in body
@@ -89,8 +90,7 @@ function chart()
         }
         else
         {
-            html += "<li>Name: " + shuttle.seats[i].name + "</li>";
-            html += "<li>House: " + shuttle.seats[i].house + "</li>";
+            html += "<li>Name: " + shuttle.seats[i].name + ". House: " + shuttle.seats[i].house +"</li>";
         }
     }
     html += "</ol>";
@@ -102,7 +102,24 @@ function chart()
  */
 function dropoff()
 {
-    alert("TODO");
+    var nopassengersinrange = true;
+    for (var i = 0; i < shuttle.seats.length; i++)
+    {
+        // detect if the shuttle is within 30.0 meters of an on-board passenger’s house
+        var house = shuttle.seats[i].house;
+        var d = shuttle.distance(houses[house].lat, houses[house].lng);
+        if (shuttle.seats[i] != null && d <= 30.0)
+        {    
+            shuttle.seats[i] = null;
+            chart();
+            var nopassengersinrange = false;
+        }
+    }
+    if (nopassengersinrange == true)
+    {
+        $("#announcements").html("there are no passengers to be dropped off");
+    }
+    shuttle.seats[i]
 }
 
 /**
@@ -185,7 +202,9 @@ function keystroke(event, state)
     {
         event = window.event;
     }
-
+    
+    $("#announcements").html("no announcements at this time");
+    
     // left arrow
     if (event.keyCode == 37)
     {
@@ -196,6 +215,7 @@ function keystroke(event, state)
     // up arrow
     else if (event.keyCode == 38)
     {
+       
         shuttle.states.tiltingUpward = state;
         return false;
     }
@@ -297,24 +317,28 @@ function pickup()
     if (passengersinrange.length > 0 && emptyseats > 0)
     {
         $("#announcements").html("There are passengers to be picked up!");
-        for (var i = 0; i < passengersinrange.length; i++)
+        
+        var i = 0;
+        while (i < passengersinrange.length)
         {
-            for (var j = 0; j < emptyseats; j++)
+            var j = 0;
+            while (j < emptyseats)
             {
                 // add passenger to shuttle
                 if (shuttle.seats[j] == null)
                 {
-                    shuttle.seats[i] = PASSENGERS[passengersinrange[i]];
+                    shuttle.seats[j] = PASSENGERS[passengersinrange[i]];
                     
                     // remove placemark 
                     var features = earth.getFeatures()
-                    features.removeChild(PASSENGERS[passengersinrange[i]].placemark)
+                    features.removeChild(PASSENGERS[passengersinrange[i]].placemark);
                     
                     // remove marker 
                     PASSENGERS[passengersinrange[i]].marker.setMap(null); 
-        
+                    i++;   
                     chart();
                 }
+                j++;
             }  
         } 
             
@@ -327,7 +351,6 @@ function pickup()
     {
         $("#announcements").html("There are no passengers to be picked up");
     }
-    // any such announcments should be removed or replaced with some default text as soon as the shuttle moves 
 }
 
 /**
@@ -390,6 +413,7 @@ function populate()
         // add placemark to Earth
         earth.getFeatures().appendChild(placemark);
        
+        //remember passenger's placemark
         PASSENGERS[i].placemark = placemark;
 
         // add marker to map
@@ -399,16 +423,9 @@ function populate()
             position: new google.maps.LatLng(building.lat, building.lng),
             title: PASSENGERS[i].name + " at " + building.name
         });
-
-        PASSENGERS[i].marker = marker;
         
-        //remember passenger's placemark and marker for pick-up's sake and store them in some global arrays or objects
-        // not pick up any freshmen (anyone whose home isn't in js/houses.js)
-  
-        // passenger's location is given by their placemark
-        //get Geometry()//on the placemark
-        //getLatitude() //after
-        //get Geometry() -> getLongitude()
+        //remember passenger's marker
+        PASSENGERS[i].marker = marker;
     }
 }
 
