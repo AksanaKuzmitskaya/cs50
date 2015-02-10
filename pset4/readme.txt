@@ -1,3 +1,6 @@
-Game. Bounce the ball off of the paddle so as to hit bricks with it. 
-If you break all the bricks, you win! 
-But if you miss the ball three times, you lose!
+Developed a game with a graphical user interface
+atop the Stanford Portable Library 
+
+Design included user options such as number, color 
+and size of bricks. The ball movement was implemented with 
+a random angle trajectory after a hit.
